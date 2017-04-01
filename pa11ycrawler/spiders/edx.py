@@ -111,6 +111,7 @@ class EdxSpider(CrawlSpider):
             pa11y_ignore_rules_url=None,
             data_dir="data",
             single_url=None,
+            username=None,
         ):  # noqa
         super(EdxSpider, self).__init__()
 
@@ -123,6 +124,7 @@ class EdxSpider(CrawlSpider):
         self.http_pass = http_pass
         self.data_dir = os.path.abspath(os.path.expanduser(data_dir))
         self.single_url = single_url
+        self.username = username
         self.pa11y_ignore_rules = load_pa11y_ignore_rules(
             file=pa11y_ignore_rules_file, url=pa11y_ignore_rules_url,
         )
@@ -140,6 +142,7 @@ class EdxSpider(CrawlSpider):
                     course_id=self.course_key,
                     depth="all",
                     all_blocks="true",
+                    username=self.username,
                 )
             )
             self.start_urls = [api_url]
